@@ -3,13 +3,16 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def current_user
+    return nil unless session[:session_token]
+    @current_user ||= User.find_by(session_token: session[:session_token])
+  end
 
-    user = User.find_by(session_token: session[:session_token])
-    if user
-      return @current_user = user
-    else
-      nil
-    end
+  def login_user!
+      session[:session_token] = @user.session_token
+  end
+
+  def logged_in?
+    redirect_to cats_url if !!current_user
   end
 
 end
