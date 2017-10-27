@@ -11,13 +11,22 @@
     <% if current_user %>
       <h1> <%= current_user.user_name %> </h1>
 
-      <form class="" action="<%=sessions_url%>" method="post">
+      <form action="<%=sessions_url%>" method="post">
         <input type="hidden" value="delete" name="_method">
+        <input
+    type="hidden"
+    name="authenticity_token"
+    value="<%= form_authenticity_token %>">
+    
         <input type="submit" value="Log out">
       </form>
 
     <% else  %>
-      <form class="" action=" <%= sessions_url %>" method="post">
+      <form action=" <%= sessions_url %>" method="post">
+        <input
+    type="hidden"
+    name="authenticity_token"
+    value="<%= form_authenticity_token %>">
 
         <input type="submit" value="Log in">
       </form>

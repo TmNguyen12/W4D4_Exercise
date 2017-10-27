@@ -1,6 +1,11 @@
 <!-- <%= render '/shared/errors' %> -->
 
 <form action="<%= sessions_url %>" method="post">
+  <input
+    type="hidden"
+    name="authenticity_token"
+    value="<%= form_authenticity_token %>">
+
   <label for="user_name">Username</label>
   <input type="text" name="user[user_name]" value="">
 
